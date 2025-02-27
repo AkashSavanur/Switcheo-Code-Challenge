@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package todolist.todolist;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "todolist/todolist/params.proto";
+import "todolist/todolist/task.proto";
+
+option go_package = "todolist/x/todolist/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/todolist/todolist/params";
+  
+  }
+  
+  // Queries a list of ShowTask items.
+  rpc ShowTask (QueryShowTaskRequest) returns (QueryShowTaskResponse) {
+    option (google.api.http).get = "/todolist/todolist/show_task/{id}";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryShowTaskRequest {
+  uint64 id = 1;
+}
+
+message QueryShowTaskResponse {
+  Task task = 1;
+}
+

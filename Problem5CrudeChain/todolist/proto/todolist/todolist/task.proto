@@ -1,0 +1,13 @@
+syntax = "proto3";
+package todolist.todolist;
+
+option go_package = "todolist/x/todolist/types";
+
+message Task {
+  
+  string title = 1; 
+  string description = 2; 
+  string creator = 3; 
+  uint64 id = 4; 
+  bool completed = 5; 
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+package todolist.todolist;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "todolist/todolist/params.proto";
+
+option go_package = "todolist/x/todolist/types";
+
+// GenesisState defines the todolist module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
